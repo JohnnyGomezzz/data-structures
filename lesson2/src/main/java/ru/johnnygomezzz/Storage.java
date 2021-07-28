@@ -45,19 +45,19 @@ public class Storage {
                     notebooks[i + 1] = temp;
                     isChange = true;
                 }
-                if (notebooks[i].getPrice() == notebooks[i + 1].getPrice()
-                        && notebooks[i].getRam() == notebooks[i + 1].getRam()) {
-                    while (notebooks[i].getBrand().equals(brand[min])) {
-                        Notebook temp = notebooks[i];
-                        notebooks[i] = notebooks[i + 1];
-                        notebooks[i + 1] = temp;
-                    }
-                    min++;
-                    if (min == 4) {
-                        break;
-                    }
-                    isChange = true;
-                }
+//                if (notebooks[i].getPrice() == notebooks[i + 1].getPrice()
+//                        && notebooks[i].getRam() == notebooks[i + 1].getRam()) {
+//                    while (notebooks[i].getBrand().equals(brand[min])) {
+//                        Notebook temp = notebooks[i];
+//                        notebooks[i] = notebooks[i + 1];
+//                        notebooks[i + 1] = temp;
+//                    }
+//                    min++;
+//                    if (min == 4) {
+//                        break;
+//                    }
+//                    isChange = true;
+//                }
             }
         } while (isChange);
 
