@@ -1,66 +1,76 @@
 package ru.johnnygomezzz;
 
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 public class Storage {
 
-    public static void main(String[] args) {
+    public static List<Notebook> quickSort(List<Notebook> arr) {
 
-        Random random = new Random();
+        if (arr.isEmpty()) {
+            return arr;
+        }
+
+        Notebook base = arr.get(0);
+
+        List<Notebook> left = new LinkedList<>();
+        List<Notebook> middle = new LinkedList<>();
+        List<Notebook> right = new LinkedList<>();
+
+
+        for (Notebook n : arr) {
+            if (n.getPrice() > base.getPrice()) {
+                right.add(n);
+            }
+            if (n.getPrice() == base.getPrice()) {
+                if (n.getRam() > base.getRam()) {
+                    right.add(n);
+                }
+                if (n.getRam() < base.getRam()) {
+                    left.add(n);
+                }
+                if (n.getRam() == base.getRam()) {
+                    middle.add(n);
+                }
+            } else if (n.getPrice() < base.getPrice()) {
+                left.add(n);
+            }
+        }
+
+        left = quickSort(left);
+        right = quickSort(right);
+
+        left.addAll(middle);
+        left.addAll(right);
+
+        return left;
+    }
+
+    public static void sort(Notebook[] arr) {
+        List<Notebook> list = Arrays.asList(arr);
+
+        quickSort(list).toArray(arr);
+    }
+
+    public static void compareBrands(String[] brands) {
+
+    }
+
+    public static void main(String[] args) {
 
         Notebook[] notebooks = new Notebook[100];
 
         String[] brand = {"Lenuvo", "Asos", "MacNote", "Eser", "Xamiou"};
 
         for (int i = 0; i < notebooks.length; i++) {
-            int price = random.nextInt(1000 - 500 + 1) + 500;
-            int price100 = price - price % 100;
-
-            int ram = random.nextInt(12 - 4 + 1) + 4;
-            int ram4 = ram - ram % 4;
-
-            int rndBrand = random.nextInt(5);
-
-            Notebook notebook = new Notebook(price100, ram4, brand[rndBrand]);
+            Notebook notebook = new Notebook();
+            notebook.setRndPrice(500, 1000, 100);
+            notebook.setRndRam(4, 12, 4);
+            notebook.setRndBrand(brand);
 
             notebooks[i] = notebook;
         }
 
-        Boolean isChange;
-        int min = 0;
-        do {
-            isChange = false;
-            for (int i = 0; i < notebooks.length - 1; i++) {
-                if (notebooks[i].getPrice() > notebooks[i + 1].getPrice()) {
-                    Notebook temp = notebooks[i];
-                    notebooks[i] = notebooks[i + 1];
-                    notebooks[i + 1] = temp;
-                    isChange = true;
-                }
-                if (notebooks[i].getPrice() == notebooks[i + 1].getPrice()
-                && notebooks[i].getRam() > notebooks[i + 1].getRam()) {
-                    Notebook temp = notebooks[i];
-                    notebooks[i] = notebooks[i + 1];
-                    notebooks[i + 1] = temp;
-                    isChange = true;
-                }
-//                if (notebooks[i].getPrice() == notebooks[i + 1].getPrice()
-//                        && notebooks[i].getRam() == notebooks[i + 1].getRam()) {
-//                    while (notebooks[i].getBrand().equals(brand[min])) {
-//                        Notebook temp = notebooks[i];
-//                        notebooks[i] = notebooks[i + 1];
-//                        notebooks[i + 1] = temp;
-//                    }
-//                    min++;
-//                    if (min == 4) {
-//                        break;
-//                    }
-//                    isChange = true;
-//                }
-            }
-        } while (isChange);
-
+        sort(notebooks);
         System.out.println(Arrays.toString(notebooks));
     }
 }
