@@ -22,10 +22,6 @@ public class Notebook {
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public void setRndPrice(int min, int max, int step) {
         int price = random.nextInt(max - min + 1) + min;
         this.price = price - price % step;

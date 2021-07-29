@@ -4,6 +4,21 @@ import java.util.*;
 
 public class Storage {
 
+    public static String[] brand = new String[]{"Lenuvo", "Asos", "MacNote", "Eser", "Xamiou"};
+
+    public static int getBrandNumber(String brand, String[] brands) {
+        int count = 0;
+        for (String s : brands) {
+            if (!brand.equals(s)) {
+                count++;
+            } else {
+                count++;
+                break;
+            }
+        }
+        return count;
+    }
+
     public static List<Notebook> quickSort(List<Notebook> arr) {
 
         if (arr.isEmpty()) {
@@ -29,7 +44,15 @@ public class Storage {
                     left.add(n);
                 }
                 if (n.getRam() == base.getRam()) {
-                    middle.add(n);
+                    if (getBrandNumber(n.getBrand(), brand) > getBrandNumber(base.getBrand(), brand)) {
+                        right.add(n);
+                    }
+                    if (getBrandNumber(n.getBrand(), brand) < getBrandNumber(base.getBrand(), brand)) {
+                        left.add(n);
+                    }
+                    if (getBrandNumber(n.getBrand(), brand) == getBrandNumber(base.getBrand(), brand)) {
+                        middle.add(n);
+                    }
                 }
             } else if (n.getPrice() < base.getPrice()) {
                 left.add(n);
@@ -51,15 +74,9 @@ public class Storage {
         quickSort(list).toArray(arr);
     }
 
-    public static void compareBrands(String[] brands) {
-
-    }
-
     public static void main(String[] args) {
 
-        Notebook[] notebooks = new Notebook[100];
-
-        String[] brand = {"Lenuvo", "Asos", "MacNote", "Eser", "Xamiou"};
+        Notebook[] notebooks = new Notebook[5000];
 
         for (int i = 0; i < notebooks.length; i++) {
             Notebook notebook = new Notebook();
