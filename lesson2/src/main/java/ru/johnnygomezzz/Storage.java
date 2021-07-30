@@ -70,7 +70,6 @@ public class Storage {
 
     public static void sort(Notebook[] arr) {
         List<Notebook> list = Arrays.asList(arr);
-
         quickSort(list).toArray(arr);
     }
 
