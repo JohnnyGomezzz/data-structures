@@ -9,7 +9,7 @@ public class ConsistentArray {
         Random random = new Random();
 
         Integer[] consistentArray = new Integer[length];
-        int rndElement = random.nextInt((length - 1) + 1);
+        int rndElement = random.nextInt(length - 1 + 1) + 1;
         int cnt = 1;
         System.out.println(rndElement);
 
